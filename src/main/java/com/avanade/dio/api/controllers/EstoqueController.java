@@ -1,14 +1,9 @@
 package com.avanade.dio.api.controllers;
 
-import org.springframework.http.HttpStatus;
-
-import com.avanade.dio.api.services.EstoqueService;
-
 import java.util.List;
 
-import com.avanade.dio.api.models.Estoque;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.avanade.dio.api.models.Estoque;
+import com.avanade.dio.api.services.EstoqueService;
 
 @RestController
 @RequestMapping("/api/v1/itens")
@@ -47,5 +46,11 @@ public class EstoqueController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void excluir(@PathVariable Long id){
         estoqueService.excluir(id);
-    }       
+    }
+    
+    @RequestMapping("/")
+	public ModelAndView MainPage() {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
 }

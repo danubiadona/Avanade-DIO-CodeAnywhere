@@ -3,12 +3,12 @@ package com.avanade.dio.api.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.avanade.dio.api.models.Estoque;
 import com.avanade.dio.api.models.Loja;
 import com.avanade.dio.api.models.Produto;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class EstoqueService {

@@ -1,5 +1,6 @@
 package com.avanade.dio.api.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ProdutoService {
     }
 
     public Produto geraItem(int id, String ean){
-        return new Produto(id, "descricao" + id, new Date(), ean, false);
+        return new Produto(id, "descricao" + id, LocalDate.now( ), ean, false);
     }    
 
 }

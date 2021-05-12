@@ -1,15 +1,86 @@
 package com.avanade.dio.api.models;
 
-import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-public class Produto {
-    private int codigo;
-    private String descricao;
-    private Date validade;
-    private String ean;
-    private boolean inativo;
+public class Produto
+{
+	private Integer codigo;
+	private String descricao;
+	private LocalDate dataValidade;
+	private String ean;
+	private Boolean indInativo;
+	
+	public Produto( )
+	{
+		
+	}
+
+	public Produto( Integer codigo, String descricao, LocalDate dataValidade, String ean, Boolean indInativo )
+	{
+		super( );
+		this.codigo = codigo;
+		this.descricao = descricao;
+		this.dataValidade = dataValidade;
+		this.ean = ean;
+		this.indInativo = indInativo;
+	}
+
+	public Produto( String descricao, LocalDate dataValidade, String ean, Boolean indInativo )
+	{
+		super( );
+		this.descricao = descricao;
+		this.dataValidade = dataValidade;
+		this.ean = ean;
+		this.indInativo = indInativo;
+	}
+
+	public Integer getCodigo( )
+	{
+		return codigo;
+	}
+
+	public void setCodigo( Integer codigo )
+	{
+		this.codigo = codigo;
+	}
+
+	public String getDescricao( )
+	{
+		return descricao;
+	}
+
+	public void setDescricao( String descricao )
+	{
+		this.descricao = descricao;
+	}
+
+	public LocalDate getDataValidade( )
+	{
+		return dataValidade;
+	}
+
+	public void setDataValidade( LocalDate dataValidade )
+	{
+		this.dataValidade = dataValidade;
+	}
+
+	public String getEan( )
+	{
+		return ean;
+	}
+
+	public void setEan( String ean )
+	{
+		this.ean = ean;
+	}
+
+	public Boolean getIndInativo( )
+	{
+		return indInativo;
+	}
+
+	public void setIndInativo( Boolean indInativo )
+	{
+		this.indInativo = indInativo;
+	}
 }
