@@ -2,8 +2,18 @@ package com.avanade.dio.api.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="PRODUTOS")
 public class Produto
 {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigo;
 	private String descricao;
 	private LocalDate dataValidade;

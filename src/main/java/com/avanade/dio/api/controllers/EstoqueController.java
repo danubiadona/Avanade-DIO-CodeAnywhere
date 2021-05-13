@@ -16,14 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanade.dio.api.models.Estoque;
+import com.avanade.dio.api.models.Loja;
+import com.avanade.dio.api.models.Produto;
+import com.avanade.dio.api.repository.EstoqueRepository;
+import com.avanade.dio.api.repository.LojaRepository;
+import com.avanade.dio.api.repository.ProdutoRepository;
 import com.avanade.dio.api.services.EstoqueService;
 
 @RestController
 @RequestMapping("/api/v1/itens")
 public class EstoqueController {
-    @Autowired
-    private EstoqueService estoqueService;
     
+	@Autowired
+    private EstoqueService estoqueService;
+	
     @GetMapping
     public List<Estoque> listar(){
         return estoqueService.findAll();
@@ -47,10 +53,4 @@ public class EstoqueController {
     public void excluir(@PathVariable Long id){
         estoqueService.excluir(id);
     }
-    
-    @RequestMapping("/")
-	public ModelAndView MainPage() {
-		ModelAndView mv = new ModelAndView("index");
-		return mv;
-	}
 }

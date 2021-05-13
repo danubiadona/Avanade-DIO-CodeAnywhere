@@ -8,4 +8,5 @@ Mentoria #2 | Tudo o que você sempre quis saber sobre Java e Orientação a Obj
 Mentoria #3 | Conceitos e Melhores Práticas com o Banco de Dados SQL Server <br>
 Mentoria #4 | Projetos Ágeis com Scrum <br>
 Mentoria #5 | Projeto - Parte 1: Criando uma API REST com Spring Boot <br>
+Mentoria #6 | Projeto - Parte 2: Acessando e persistindo dados com SQL Server (Spring Data) <br>
 

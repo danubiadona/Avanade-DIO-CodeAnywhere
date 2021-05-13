@@ -3,14 +3,20 @@ package com.avanade.dio.api.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.avanade.dio.api.models.Loja;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.avanade.dio.api.models.Loja;
+import com.avanade.dio.api.repository.LojaRepository;
 
 @Service
 public class LojaService {
-    public List<Loja> findAll(){
-        return geraLista();
+    
+	@Autowired
+	private LojaRepository lojaRepository;
+	
+	public Iterable<Loja> findAll(){
+        return lojaRepository.findAll( );
     }
 
     public void inserir(Loja loja){
@@ -25,7 +31,7 @@ public class LojaService {
         System.out.println("EXCLUIDO: " + id);
     }    
 
-    private List<Loja> geraLista(){
+    private Iterable<Loja> geraLista(){
         List<Loja> listaLoja = new ArrayList<Loja>();
         Loja l1 = geraItem(1);
         Loja l2 = geraItem(2);

@@ -25,7 +25,7 @@ public class LojaController {
     private LojaService lojaService;
     
     @GetMapping
-    public List<Loja> listar(){
+    public Iterable<Loja> listar(){
         return lojaService.findAll();
     }
 

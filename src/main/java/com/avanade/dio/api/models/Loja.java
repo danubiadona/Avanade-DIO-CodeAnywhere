@@ -1,11 +1,29 @@
 package com.avanade.dio.api.models;
 
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+@Entity
+@Table(name="LOJAS")
 public class Loja
 {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigo;
 	private String nome;
 	private Boolean indInativo;
+
+	@JsonManagedReference //Annotation para Evitar loop infinito
+	@OneToMany(mappedBy="codigoFilial")
+	private List<Estoque> estoque;
 	
 	public Loja( )
 	{
@@ -55,5 +73,15 @@ public class Loja
 	public void setIndInativo( Boolean indInativo )
 	{
 		this.indInativo = indInativo;
+	}
+
+	public List< Estoque > getEstoque( )
+	{
+		return estoque;
+	}
+
+	public void setEstoque( List< Estoque > estoque )
+	{
+		this.estoque = estoque;
 	}
 }

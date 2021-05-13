@@ -1,22 +1,40 @@
 package com.avanade.dio.api.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@IdClass(EstoqueId.class)
 public class Estoque
 {
 	private Integer quantidade;
 
-	private Produto produto;
-	private Loja filial;
+	@Id
+	@ManyToOne
+	@JoinColumn(name="CODIGO_PRODUTO", nullable=false)
+	private Produto codigoProduto;
+	
+	@Id
+	@JsonBackReference //Annotation para Evitar loop infinito
+	@ManyToOne
+	@JoinColumn(name="CODIGO_FILIAL", nullable=false)
+	private Loja codigoFilial;
 	
 	public Estoque( )
 	{
 		
 	}
 
-	public Estoque( Produto produto, Loja filial, Integer quantidade )
+	public Estoque( Produto codigoProduto, Loja codigoFilial, Integer quantidade )
 	{
 		super( );
-		this.produto = produto;
-		this.filial = filial;
+		this.codigoProduto = codigoProduto;
+		this.codigoFilial = codigoFilial;
 		this.quantidade = quantidade;
 	}
 
@@ -30,23 +48,23 @@ public class Estoque
 		this.quantidade = quantidade;
 	}
 
-	public Produto getProduto( )
+	public Produto getCodigoProduto( )
 	{
-		return produto;
+		return codigoProduto;
 	}
 
-	public void setProduto( Produto produto )
+	public void setCodigoProduto( Produto codigoProduto )
 	{
-		this.produto = produto;
+		this.codigoProduto = codigoProduto;
 	}
 
-	public Loja getFilial( )
+	public Loja getCodigoFilial( )
 	{
-		return filial;
+		return codigoFilial;
 	}
 
-	public void setFilial( Loja filial )
+	public void setCodigoFilial( Loja codigoFilial )
 	{
-		this.filial = filial;
+		this.codigoFilial = codigoFilial;
 	}
 }
