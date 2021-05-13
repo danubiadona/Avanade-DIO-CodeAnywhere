@@ -1,8 +1,5 @@
 package com.avanade.dio.api.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,29 +15,24 @@ public class LojaService {
 	public Iterable<Loja> findAll(){
         return lojaRepository.findAll( );
     }
+	
+	public Loja findById(Integer id) {
+		return lojaRepository.findByCodigo( id );
+	}
 
     public void inserir(Loja loja){
+    	lojaRepository.save( loja );
         System.out.println("INSERIDO: " + loja);
     }
 
     public void alterar(Loja loja){
+    	lojaRepository.save( loja );
         System.out.println("ALTERADO: " + loja);
     }    
 
-    public void excluir(Long id){
-        System.out.println("EXCLUIDO: " + id);
+    public void excluir(Integer id){
+    	Loja loja = lojaRepository.findByCodigo( id );
+    	lojaRepository.delete( loja );
+        System.out.println("EXCLUIDO: " + loja);
     }    
-
-    private Iterable<Loja> geraLista(){
-        List<Loja> listaLoja = new ArrayList<Loja>();
-        Loja l1 = geraItem(1);
-        Loja l2 = geraItem(2);
-        listaLoja.add(l1);
-        listaLoja.add(l2);
-        return listaLoja;    
-    }
-
-    public Loja geraItem(int id){
-        return new Loja(id, "nome" + id , false);
-    }
 }

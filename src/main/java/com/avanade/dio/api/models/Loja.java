@@ -45,6 +45,12 @@ public class Loja
 		this.indInativo = indInativo;
 	}
 
+	@Override
+	public String toString( )
+	{
+		return "Loja [codigo=" + codigo + ", nome=" + nome + ", indInativo=" + indInativo + "]";
+	}
+
 	public Integer getCodigo( )
 	{
 		return codigo;

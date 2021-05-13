@@ -44,7 +44,7 @@ public class LojaController {
     @DeleteMapping
     @RequestMapping("{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void excluir(@PathVariable Long id){
+    public void excluir(@PathVariable Integer id){
         lojaService.excluir(id);
     }    
 }

@@ -38,6 +38,13 @@ public class Estoque
 		this.quantidade = quantidade;
 	}
 
+	@Override
+	public String toString( )
+	{
+		return "Estoque [quantidade=" + quantidade + ", codigoProduto=" + codigoProduto + ", codigoFilial="
+				+ codigoFilial + "]";
+	}
+
 	public Integer getQuantidade( )
 	{
 		return quantidade;

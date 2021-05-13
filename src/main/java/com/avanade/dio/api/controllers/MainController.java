@@ -2,15 +2,16 @@ package com.avanade.dio.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanade.dio.api.models.Estoque;
 import com.avanade.dio.api.models.Loja;
 import com.avanade.dio.api.models.Produto;
-import com.avanade.dio.api.repository.EstoqueRepository;
-import com.avanade.dio.api.repository.LojaRepository;
-import com.avanade.dio.api.repository.ProdutoRepository;
+import com.avanade.dio.api.services.EstoqueService;
+import com.avanade.dio.api.services.LojaService;
+import com.avanade.dio.api.services.ProdutoService;
 
 /**
  * @author marcos.goncalves
@@ -20,44 +21,49 @@ import com.avanade.dio.api.repository.ProdutoRepository;
 public class MainController
 {
 	@Autowired
-	private EstoqueRepository estoqueRepository;
+    private EstoqueService estoqueService;
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
+    private LojaService lojaService;
 	
 	@Autowired
-	private LojaRepository lojaRepository;
+	private ProdutoService produtoService;
 	
 	@RequestMapping("/")
 	public ModelAndView MainPage() {
 		ModelAndView mv = new ModelAndView("index");
-		Iterable<Loja> lojas = lojaRepository.findAll( );
+		Iterable<Loja> lojas = lojaService.findAll( );
 		mv.addObject( "lojas", lojas );
 		return mv;
 	}
 
-    @RequestMapping("/insere")
-	public String criaEstoque() {
-		Produto batata = produtoRepository.findByCodigo( 3 );
-		Loja lojaRecife = lojaRepository.findByCodigo( 3000 );
-		Estoque e = new Estoque( batata , lojaRecife, 70 );
-		estoqueRepository.save( e );
+    @RequestMapping("estoque/insere/{codigoFilial}/{codigoProduto}/{quantidade}")
+	public String criaEstoque(@PathVariable Integer codigoFilial, @PathVariable Integer codigoProduto, @PathVariable Integer quantidade) {
+    	Loja loja = lojaService.findById( codigoFilial );
+    	Produto produto = produtoService.findById( codigoProduto );
+    	Estoque estoque = new Estoque( produto, loja, quantidade );
+    	estoqueService.inserir(estoque);
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/atualiza")
-	public String atualiza() {
-		Produto objeto2 = produtoRepository.findByCodigo( 2 );
-		objeto2.setDescricao( "Cenoura" );
-		produtoRepository.save( objeto2 );
+	@RequestMapping("estoque/atualiza/{codigoFilial}/{codigoProduto}/{quantidade}")
+	public String atualizaEstoque(@PathVariable Integer codigoFilial, @PathVariable Integer codigoProduto, @PathVariable Integer quantidade) {
+		Estoque estoque = estoqueService.findById( codigoFilial, codigoProduto );
+		estoqueService.alterar( estoque );
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/deleta")
-	public String delete() {
-		Produto p = produtoRepository.findByCodigo( 3 );
-		Estoque e = estoqueRepository.findByCodigoProduto( p );
-		estoqueRepository.delete( e );
+	@RequestMapping("estoque/deleta/{codigoFilial}/{codigoProduto}")
+	public String deletaEstoque(@PathVariable Integer codigoFilial, @PathVariable Integer codigoProduto) {
+		estoqueService.excluir(codigoFilial, codigoProduto);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("produto/atualiza/descricao/{codigoProduto}/{descricao}")
+	public String atualizaNomeProduto(@PathVariable Integer codigoProduto, @PathVariable String descricao) {
+		Produto produto = produtoService.findById( codigoProduto );
+		produto.setDescricao( descricao );
+		produtoService.alterar( produto );
 		return "redirect:/";
 	}
 }

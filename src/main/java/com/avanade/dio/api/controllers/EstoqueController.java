@@ -1,7 +1,5 @@
 package com.avanade.dio.api.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,14 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.avanade.dio.api.models.Estoque;
-import com.avanade.dio.api.models.Loja;
-import com.avanade.dio.api.models.Produto;
-import com.avanade.dio.api.repository.EstoqueRepository;
-import com.avanade.dio.api.repository.LojaRepository;
-import com.avanade.dio.api.repository.ProdutoRepository;
 import com.avanade.dio.api.services.EstoqueService;
 
 @RestController
@@ -31,7 +23,7 @@ public class EstoqueController {
     private EstoqueService estoqueService;
 	
     @GetMapping
-    public List<Estoque> listar(){
+    public Iterable<Estoque> listar(){
         return estoqueService.findAll();
     }
 
@@ -39,6 +31,14 @@ public class EstoqueController {
     @ResponseStatus(HttpStatus.CREATED)
     public void inserir(@RequestBody Estoque estoque){
         estoqueService.inserir(estoque);
+    }
+    
+    @PostMapping
+    @RequestMapping("{codigoFilial}/{codigoProduto}/{quantidade}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void inserir(@PathVariable Integer codigoFilial, @PathVariable Integer codigoProduto, @PathVariable Integer quantidade){
+        Estoque estoque = estoqueService.findById( codigoFilial, codigoProduto );
+    	estoqueService.inserir(estoque);
     }
 
     @PutMapping
@@ -48,9 +48,9 @@ public class EstoqueController {
     }
 
     @DeleteMapping
-    @RequestMapping("{id}")
+    @RequestMapping("{codigoFilial}/{codigoProduto}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void excluir(@PathVariable Long id){
-        estoqueService.excluir(id);
+    public void excluir(@PathVariable Integer codigoFilial, @PathVariable Integer codigoProduto){
+        estoqueService.excluir(codigoFilial, codigoProduto);
     }
 }

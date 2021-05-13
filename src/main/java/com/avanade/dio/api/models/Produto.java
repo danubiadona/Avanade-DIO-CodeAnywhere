@@ -44,6 +44,13 @@ public class Produto
 		this.indInativo = indInativo;
 	}
 
+	@Override
+	public String toString( )
+	{
+		return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", dataValidade=" + dataValidade + ", ean="
+				+ ean + ", indInativo=" + indInativo + "]";
+	}
+
 	public Integer getCodigo( )
 	{
 		return codigo;

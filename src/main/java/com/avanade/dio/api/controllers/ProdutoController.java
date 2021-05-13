@@ -25,7 +25,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
     
     @GetMapping
-    public List<Produto> listar(){
+    public Iterable<Produto> listar(){
         return produtoService.findAll();
     }
 
@@ -44,7 +44,7 @@ public class ProdutoController {
     @DeleteMapping
     @RequestMapping("{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void excluir(@PathVariable Long id){
+    public void excluir(@PathVariable Integer id){
         produtoService.excluir(id);
     }
 }
