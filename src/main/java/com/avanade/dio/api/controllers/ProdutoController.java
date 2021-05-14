@@ -7,6 +7,7 @@ import com.avanade.dio.api.services.ProdutoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,5 +47,10 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void excluir(@PathVariable Integer id){
         produtoService.excluir(id);
+    }
+
+    @GetMapping("/validade")
+    public ResponseEntity<Produto> buscarTopByOrderByDataValidade() {
+        return ResponseEntity.ok().body(produtoService.buscarTopByOrderByDataValidade());
     }
 }

@@ -41,4 +41,10 @@ public class ProdutoService {
     	produtoRepository.delete( produto );
         System.out.println("EXCLUIDO: " + produto);
     }
+
+    public Produto buscarTopByOrderByDataValidade(){
+		Produto produto = produtoRepository.findTopByOrderByDataValidade();
+		System.out.println("Produto: " + produto);
+		return produto;
+	}
 }
