@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Loja
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigo;
 	private String nome;
 	private Boolean indInativo;

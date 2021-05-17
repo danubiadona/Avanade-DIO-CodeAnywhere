@@ -13,7 +13,6 @@ import javax.persistence.Table;
 public class Produto
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer codigo;
 	private String descricao;
 	private LocalDate dataValidade;
