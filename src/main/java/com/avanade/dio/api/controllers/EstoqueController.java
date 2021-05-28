@@ -16,7 +16,7 @@ import com.avanade.dio.api.models.Estoque;
 import com.avanade.dio.api.services.EstoqueService;
 
 @RestController
-@RequestMapping("/api/v1/itens")
+@RequestMapping("/api/v1/price")
 public class EstoqueController {
     
 	@Autowired

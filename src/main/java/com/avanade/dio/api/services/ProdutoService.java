@@ -1,12 +1,6 @@
 package com.avanade.dio.api.services;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.avanade.dio.api.models.Produto;
-import com.avanade.dio.api.repository.LojaRepository;
 import com.avanade.dio.api.repository.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
